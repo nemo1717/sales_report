@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" type="text/css" href="/css/style.css" />
+</head>
+
+<header>
+    <div class="container">
+        <div id="branding">
+            <h4> <span class="highlight">Niggas News</span> Party</h4>
+        </div>
+        <nav>
+            <ul>
+                <li ><a href = "/test">Home</a></li>
+                <li class ="current"><a href = "/insertme">Add Party </a></li>
+                <li><a href = "/about">About</a></li>
+                <li><a href = "/login">Login</a></li>
+                <li><a href = "/register">Register</a></li>
+
+            </ul>
+          
+        </nav>
+    </div>
+</header>
+
+<body>
+    <div class="container">
+        <h3><%= typeof msg != 'undefined' ? msg : '' %></h3>
+        
+
+        <form action="/insertme" method="POST" autocomplete="off" id="contact" enctype="multipart/form-data">
+          <h3>Add Your Event</h3>
+          <fieldset> Party Name (Required) <input name = "party_name" placeholder="Party Name" type="text" /></fieldset>
+          <fieldset> Address (Required) <input name = "address" placeholder="Address" type="text" /></fieldset>
+
+          <fieldset>
+              <label for="State">State (Required)</label>
+              <select id="state_name"  name="state_name" type = "text">
+              <option value="Minnesota">Minnesota</option>
+            </select>
+          </fieldset>
+       
+          <fieldset> City (Required)
+                    <input id="myInput" type="text" name="city_name" placeholder="Please Only Select Available Cities">
+                  </fieldset>
+                
+                <script>
+                function autocomplete(inp, arr) {
+                  /*the autocomplete function takes two arguments,
+                  the text field element and an array of possible autocompleted values:*/
+                  var currentFocus;
+                  /*execute a function when someone writes in the text field:*/
+                  inp.addEventListener("input", function(e) {
+                      var a, b, i, val = this.value;
+                      /*close any already open lists of autocompleted values*/
+                      closeAllLists();
+                      if (!val) { return false;}
+                      currentFocus = -1;
+                      /*create a DIV element that will contain the items (values):*/
+                      a = document.createElement("DIV");
+                      a.setAttribute("id", this.id + "autocomplete-list");
+                      a.setAttribute("class", "autocomplete-items");
+                      /*append the DIV element as a child of the autocomplete container:*/
+                      this.parentNode.appendChild(a);
+                      /*for each item in the array...*/
+                      for (i = 0; i < arr.length; i++) {
+                        /*check if the item starts with the same letters as the text field value:*/
+                        if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+                          /*create a DIV element for each matching element:*/
+                          b = document.createElement("DIV");
+                          /*make the matching letters bold:*/
+                          b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+                          b.innerHTML += arr[i].substr(val.length);
+                          /*insert a input field that will hold the current array item's value:*/
+                          b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+                          /*execute a function when someone clicks on the item value (DIV element):*/
+                          b.addEventListener("click", function(e) {
+                              /*insert the value for the autocomplete text field:*/
+                              inp.value = this.getElementsByTagName("input")[0].value;
+                              /*close the list of autocompleted values,
+                              (or any other open lists of autocompleted values:*/
+                              closeAllLists();
+                          });
+                          a.appendChild(b);
+                        }
+                      }
+                  });
+                  /*execute a function presses a key on the keyboard:*/
+                  inp.addEventListener("keydown", function(e) {
+                      var x = document.getElementById(this.id + "autocomplete-list");
+                      if (x) x = x.getElementsByTagName("div");
+                      if (e.keyCode == 40) {
+                        /*If the arrow DOWN key is pressed,
+                        increase the currentFocus variable:*/
+                        currentFocus++;
+                        /*and and make the current item more visible:*/
+                        addActive(x);
+                      } else if (e.keyCode == 38) { //up
+                        /*If the arrow UP key is pressed,
+                        decrease the currentFocus variable:*/
+                        currentFocus--;
+                        /*and and make the current item more visible:*/
+                        addActive(x);
+                      } else if (e.keyCode == 13) {
+                        /*If the ENTER key is pressed, prevent the form from being submitted,*/
+                        e.preventDefault();
+                        if (currentFocus > -1) {
+                          /*and simulate a click on the "active" item:*/
+                          if (x) x[currentFocus].click();
+                        }
+                      }
+                  });
+                  function addActive(x) {
+                    /*a function to classify an item as "active":*/
+                    if (!x) return false;
+                    /*start by removing the "active" class on all items:*/
+                    removeActive(x);
+                    if (currentFocus >= x.length) currentFocus = 0;
+                    if (currentFocus < 0) currentFocus = (x.length - 1);
+                    /*add class "autocomplete-active":*/
+                    x[currentFocus].classList.add("autocomplete-active");
+                  }
+                  function removeActive(x) {
+                    /*a function to remove the "active" class from all autocomplete items:*/
+                    for (var i = 0; i < x.length; i++) {
+                      x[i].classList.remove("autocomplete-active");
+                    }
+                  }
+                  function closeAllLists(elmnt) {
+                    /*close all autocomplete lists in the document,
+                    except the one passed as an argument:*/
+                    var x = document.getElementsByClassName("autocomplete-items");
+                    for (var i = 0; i < x.length; i++) {
+                      if (elmnt != x[i] && elmnt != inp) {
+                        x[i].parentNode.removeChild(x[i]);
+                      }
+                    }
+                  }
+                  /*execute a function when someone clicks in the document:*/
+                  document.addEventListener("click", function (e) {
+                      closeAllLists(e.target);
+                  });
+                }
+                
+                /*An array containing all the country names in the world:*/
+                var countries = ['ADA','ADAMS','ADRIAN','AFTON','AITKIN','AKELEY','ALBANY','ALBERTA','ALBERT LEA','ALBERTVILLE','ALDEN','ALDRICH','ALEXANDRIA','ALPHA','ALTURA','ALVARADO','AMBOY','ANDOVER','ANNANDALE','ANOKA','APPLETON','APPLE VALLEY','ARCO','ARDEN HILLS','ARGYLE','ARLINGTON','ARNOLD','ASHBY','ASKOV','ATWATER','AUDUBON','AURORA','AUSTIN','AVOCA','AVON','BABBITT','BACKUS','BADGER','BAGLEY','BALATON','BARNESVILLE','BARNUM','BARRETT','BARRY','BATTLE LAKE','BAUDETTE','BAXTER','BAYPORT','BEARDSLEY','BEAVER BAY','BEAVER CREEK','BECKER','BEJOU','BELGRADE','BELLECHESTER','BELLE PLAINE','BELLINGHAM','BELTRAMI','BELVIEW','BEMIDJI','BENA','BENSON','BERTHA','BETHEL','BIGELOW','BIG FALLS','BIGFORK','BIG LAKE','BINGHAM LAKE','BIRCHWOOD VILLAGE','BIRD ISLAND','BISCAY','BIWABIK','BLACKDUCK','BLAINE','BLOMKEST','BLOOMING PRAIRIE','BLOOMINGTON','BLUE EARTH','BLUFFTON','BOCK','BORUP','BOVEY','BOWLUS','BOYD','BOY RIVER','BRAHAM','BRAINERD','BRANDON','BRECKENRIDGE','BREEZY POINT','BREWSTER','BRICELYN','BROOKLYN CENTER','BROOKLYN PARK','BROOK PARK','BROOKS','BROOKSTON','BROOTEN','BROWERVILLE','BROWNSDALE','BROWNS VALLEY','BROWNSVILLE','BROWNTON','BRUNO','BUCKMAN','BUFFALO','BUFFALO LAKE','BUHL','BURNSVILLE','BURTRUM','BUTTERFIELD','BYRON','CALEDONIA','CALLAWAY','CALUMET','CAMBRIDGE','CAMPBELL','CANBY','CANNON FALLS','CANTON','CARLOS','CARLTON','CARVER','CASS LAKE','CEDAR MILLS','CENTER CITY','CENTERVILLE','CEYLON','CHAMPLIN','CHANDLER','CHANHASSEN','CHASKA','CHATFIELD','CHICKAMAW BEACH','CHISAGO CITY','CHISHOLM','CHOKIO','CIRCLE PINES','CLARA CITY','CLAREMONT','CLARISSA','CLARKFIELD','CLARKS GROVE','CLEARBROOK','CLEAR LAKE','CLEARWATER','CLEMENTS','CLEVELAND','CLIMAX','CLINTON','CLITHERALL','CLONTARF','CLOQUET','COATES','COBDEN','COHASSET','COKATO','COLD SPRING','COLERAINE','COLOGNE','COLUMBIA HEIGHTS','COMFREY','COMSTOCK','CONGER','COOK','COON RAPIDS','CORCORAN','CORRELL','COSMOS','COTTAGE GROVE','COTTONWOOD','COURTLAND','CROMWELL','CROOKSTON','CROSBY','CROSSLAKE','CRYSTAL','CURRIE','CUYUNA','CYRUS','DAKOTA','DALTON','DANUBE','DANVERS','DARFUR','DARWIN','DASSEL','DAWSON','DAYTON','DEEPHAVEN','DEER CREEK','DEER RIVER','DEERWOOD','DE GRAFF','DELANO','DELAVAN','DELHI','DELLWOOD','DENHAM','DENNISON','DENT','DETROIT LAKES','DEXTER','DILWORTH','DODGE CENTER','DONALDSON','DONNELLY','DORAN','DOVER','DOVRAY','DULUTH','DUMONT','DUNDAS','DUNDEE','DUNNELL','EAGAN','EAGLE BEND','EAGLE LAKE','EAST BETHEL','EAST GRAND FORKS','EAST GULL LAKE','EASTON','ECHO','EDEN PRAIRIE','EDEN VALLEY','EDGERTON','EDINA','EFFIE','EITZEN','ELBA','ELBOW LAKE','ELBOW LAKE','ELGIN','ELIZABETH','ELKO','ELK RIVER','ELKTON','ELLENDALE','ELLSWORTH','ELMDALE','ELMORE','ELROSA','ELY','ELYSIAN','EMILY','EMMONS','ERHARD','ERSKINE','EVAN','EVANSVILLE','EVELETH','EXCELSIOR','EYOTA','FAIRFAX','FAIRMONT','FALCON HEIGHTS','FARIBAULT','FARMINGTON','FARWELL','FEDERAL DAM','FELTON','FERGUS FALLS','FERTILE','FIFTY LAKES','FINLAYSON','FISHER','FLENSBURG','FLOODWOOD','FLORENCE','FOLEY','FORADA','FOREST LAKE','FORESTON','FORT RIPLEY','FOSSTON','FOUNTAIN','FOXHOME','FRANKLIN','FRAZEE','FREEBORN','FREEPORT','FRIDLEY','FROST','FULDA','FUNKLEY','GARFIELD','GARRISON','GARVIN','GARY','GAYLORD','GEM LAKE','GENEVA','GENOLA','GEORGETOWN','GHENT','GIBBON','GILBERT','GILMAN','GLENCOE','GLENVILLE','GLENWOOD','GLYNDON','GOLDEN VALLEY','GONVICK','GOODHUE','GOODRIDGE','GOOD THUNDER','GOODVIEW','GRACEVILLE','GRANADA','GRAND MARAIS','GRAND MEADOW','GRAND RAPIDS','GRANITE FALLS','GRANT','GRASSTON','GREENBUSH','GREENFIELD','GREEN ISLE','GREENWALD','GREENWOOD','GREY EAGLE','GROVE CITY','GRYGLA','GULLY','HACKENSACK','HADLEY','HALLOCK','HALMA','HALSTAD','HAMBURG','HAM LAKE','HAMMOND','HAMPTON','HANCOCK','HANLEY FALLS','HANOVER','HANSKA','HARDING','HARDWICK','HARMONY','HARRIS','HARTLAND','HASTINGS','HATFIELD','HAWLEY','HAYFIELD','HAYWARD','HAZEL RUN','HECTOR','HEIDELBERG','HENDERSON','HENDRICKS','HENDRUM','HENNING','HENRIETTE','HERMAN','HERMANTOWN','HERON LAKE','HEWITT','HIBBING','HILL CITY','HILLMAN','HILLS','HILLTOP','HINCKLEY','HITTERDAL','HOFFMAN','HOKAH','HOLDINGFORD','HOLLAND','HOLLANDALE','HOLLOWAY','HOLT','HOPKINS','HOUSTON','HOWARD LAKE','HOYT LAKES','HUGO','HUMBOLDT','HUTCHINSON','IHLEN','INDEPENDENCE','INTERNATIONAL FALLS','INVER GROVE HEIGHTS','IONA','IRON JUNCTION','IRONTON','ISANTI','ISLE','IVANHOE','JACKSON','JANESVILLE','JASPER','JEFFERS','JENKINS','JOHNSON','JORDAN','KANDIYOHI','KARLSTAD','KASOTA','KASSON','KEEWATIN','KELLIHER','KELLOGG','KENNEDY','KENNETH','KENSINGTON','KENT','KENYON','KERKHOVEN','KERRICK','KETTLE RIVER','KIESTER','KILKENNY','KIMBALL','KINBRAE','KINGSTON','KINNEY','LA CRESCENT','LAFAYETTE','LAKE BENTON','LAKE BRONSON','LAKE CITY','LAKE CRYSTAL','LAKE ELMO','LAKEFIELD','LAKE HENRY','LAKELAND','LAKELAND SHORES','LAKE LILLIAN','LAKE PARK','LAKE ST. CROIX BEACH','LAKE SHORE','LAKEVILLE','LAKE WILSON','LAMBERTON','LANCASTER','LANDFALL','LANESBORO','LAPORTE','LA PRAIRIE','LA SALLE','LASTRUP','LAUDERDALE','LE CENTER','LENGBY','LEONARD','LEONIDAS','LEOTA','LE ROY','LESTER PRAIRIE','LE SUEUR','LEWISTON','LEWISVILLE','LEXINGTON','LILYDALE','LINDSTROM','LINO LAKES','LISMORE','LITCHFIELD','LITTLE CANADA','LITTLE FALLS','LITTLEFORK','LITTLE ROCK','LONG BEACH','LONG LAKE','LONG PRAIRIE','LONGVILLE','LONSDALE','LORETTO','LOUISBURG','LOWRY','LUCAN','LUVERNE','LYLE','LYND','MABEL','MCGRATH','MCGREGOR','MCINTOSH','MCKINLEY','MADELIA','MADISON','MADISON LAKE','MAGNOLIA','MAHNOMEN','MAHTOMEDI','MANCHESTER','MANHATTAN BEACH','MANKATO','MANTORVILLE','MAPLE GROVE','MAPLE LAKE','MAPLE PLAIN','MAPLETON','MAPLEVIEW','MAPLEWOOD','MARBLE','MARIETTA','MARINE ON ST. CROIX','MARSHALL','MAYER','MAYNARD','MAZEPPA','MEADOWLANDS','MEDFORD','MEDICINE LAKE','MEDINA','MEIRE GROVE','MELROSE','MENAHGA','MENDOTA','MENDOTA HEIGHTS','MENTOR','MIDDLE RIVER','MIESVILLE','MILACA','MILAN','MILLERVILLE','MILLVILLE','MILROY','MILTONA','MINNEAPOLIS','MINNEISKA','MINNEOTA','MINNESOTA CITY','MINNESOTA LAKE','MINNETONKA','MINNETONKA BEACH','MINNETRISTA','MIZPAH','MONTEVIDEO','MONTGOMERY','MONTICELLO','MONTROSE','MOORHEAD','MOOSE LAKE','MORA','MORGAN','MORRIS','MORRISTOWN','MORTON','MOTLEY','MOUND','MOUNDS VIEW','MOUNTAIN IRON','MOUNTAIN LAKE','MURDOCK','MYRTLE','NASHUA','NASHWAUK','NASSAU','NAYTAHWAUSH','NELSON','NERSTRAND','NEVIS','NEW AUBURN','NEW BRIGHTON','NEWFOLDEN','NEW GERMANY','NEW HOPE','NEW LONDON','NEW MARKET','NEW MUNICH','NEWPORT','NEW PRAGUE','NEW RICHLAND','NEW TRIER','NEW ULM','NEW YORK MILLS','NICOLLET','NIELSVILLE','NIMROD','NISSWA','NORCROSS','NORTH BRANCH','NORTHFIELD','NORTH MANKATO','NORTH OAKS','NORTHOME','NORTHROP','NORTH ST. PAUL','NORWOOD YOUNG AMERICA','OAKDALE','OAK GROVE','OAK PARK HEIGHTS','OAKPORT','ODESSA','ODIN','OGEMA','OGILVIE','OKABENA','OKLEE','OLIVIA','ONAMIA','ORMSBY','ORONO','ORONOCO','ORR','ORTONVILLE','OSAKIS','OSLO','OSSEO','OSTRANDER','OTSEGO','OTTERTAIL','OWATONNA','PALISADE','PARKERS PRAIRIE','PARK RAPIDS','PAYNESVILLE','PEASE','PELICAN RAPIDS','PEMBERTON','PENNOCK','PEQUOT LAKES','PERHAM','PERLEY','PETERSON','PIERZ','PILLAGER','PINE CITY','PINE ISLAND','PINE POINT','PINE RIVER','PINE SPRINGS','PIPESTONE','PLAINVIEW','PLATO','PLEASANT LAKE','PLUMMER','PLYMOUTH','PONEMAH','PORTER','PRESTON','PRINCETON','PRINSBURG','PRIOR LAKE','PROCTOR','QUAMBA','RACINE','RAMSEY','RANDALL','RANDOLPH','RANIER','RAYMOND','REDBY','RED LAKE','RED LAKE FALLS','RED WING','REDWOOD FALLS','REGAL','REMER','RENVILLE','REVERE','RICE','RICE LAKE','RICHFIELD','RICHMOND','RICHVILLE','RIVERTON','ROBBINSDALE','ROCHESTER','ROCK CREEK','ROCKFORD','ROCKVILLE','ROGERS','ROLLINGSTONE','RONNEBY','ROOSEVELT','ROSCOE','ROSEAU','ROSE CREEK','ROSEMOUNT','ROSEVILLE','ROTHSAY','ROUND LAKE','ROYALTON','RUSH CITY','RUSHFORD','RUSHFORD VILLAGE','RUSHMORE','RUSSELL','RUTHTON','RUTLEDGE','SABIN','SACRED HEART','ST. ANTHONY','ST. ANTHONY','ST. BONIFACIUS','ST. CHARLES','ST. CLAIR','ST. CLOUD','ST. FRANCIS','ST. HILAIRE','ST. JAMES','ST. JOSEPH','ST. LEO','ST. LOUIS PARK','ST. MARTIN','ST. MARYS POINT','ST. MICHAEL','ST. PAUL','ST. PAUL PARK','ST. PETER','ST. ROSA','ST. STEPHEN','ST. VINCENT','SANBORN','SANDSTONE','SARGEANT','SARTELL','SAUK CENTRE','SAUK RAPIDS','SAVAGE','SCANLON','SEAFORTH','SEBEKA','SEDAN','SHAFER','SHAKOPEE','SHELLY','SHERBURN','SHEVLIN','SHOREVIEW','SHOREWOOD','SILVER BAY','SILVER LAKE','SKYLINE','SLAYTON','SLEEPY EYE','SOBIESKI','SOLWAY','SOUTH HAVEN','SOUTH ST. PAUL','SPICER','SPRINGFIELD','SPRING GROVE','SPRING HILL','SPRING LAKE PARK','SPRING PARK','SPRING VALLEY','SQUAW LAKE','STACY','STAPLES','STARBUCK','STEEN','STEPHEN','STEWART','STEWARTVILLE','STILLWATER','STOCKTON','STORDEN','STRANDQUIST','STRATHCONA','STURGEON LAKE','SUNBURG','SUNFISH LAKE','SWANVILLE','TACONITE','TAMARACK','TAOPI','TAUNTON','TAYLORS FALLS','TENNEY','TENSTRIKE','THE LAKES','THIEF RIVER FALLS','THOMSON','TINTAH','TONKA BAY','TOWER','TRACY','TRAIL','TRIMONT','TROMMALD','TROSKY','TRUMAN','TURTLE RIVER','TWIN LAKES','TWIN VALLEY','TWO HARBORS','TYLER','ULEN','UNDERWOOD','UPSALA','URBANK','UTICA','VADNAIS HEIGHTS','VERGAS','VERMILLION','VERNDALE','VERNON CENTER','VESTA','VICTORIA','VIKING','VILLARD','VINELAND','VINING','VIRGINIA','WABASHA','WABASSO','WACONIA','WADENA','WAHKON','WAITE PARK','WALDORF','WALKER','WALNUT GROVE','WALTERS','WALTHAM','WANAMINGO','WANDA','WARBA','WARREN','WARROAD','WASECA','WATERTOWN','WATERVILLE','WATKINS','WATSON','WAUBUN','WAVERLY','WAYZATA','WELCOME','WELLS','WENDELL','WESTBROOK','WEST CONCORD','WESTPORT','WEST ST. PAUL','WEST UNION','WHALAN','WHEATON','WHITE BEAR LAKE','WHITE EARTH','WILDER','WILLERNIE','WILLIAMS','WILLMAR','WILLOW RIVER','WILMONT','WILTON','WINDOM','WINGER','WINNEBAGO','WINONA','WINSTED','WINTHROP','WINTON','WOLF LAKE','WOLVERTON','WOODBURY','WOOD LAKE','WOODLAND','WOODSTOCK','WORTHINGTON','WRENSHALL','WRIGHT','WYKOFF','WYOMING','ZEMPLE','ZIMMERMAN','ZUMBRO FALLS','ZUMBROTA'];
+                
+                /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
+                autocomplete(document.getElementById("myInput"), countries);
+                </script>
+                
+                
+
+
+<fieldset>  Price (Required)
+  <input id="price" type="text" name="price" placeholder="Type Free or the Dollar Amount">
+</fieldset> 
+
+
+<script>
+function autocomplete(inp, arr) {
+/*the autocomplete function takes two arguments,
+the text field element and an array of possible autocompleted values:*/
+var currentFocus;
+/*execute a function when someone writes in the text field:*/
+inp.addEventListener("input", function(e) {
+    var a, b, i, val = this.value;
+    /*close any already open lists of autocompleted values*/
+    closeAllLists();
+    if (!val) { return false;}
+    currentFocus = -1;
+    /*create a DIV element that will contain the items (values):*/
+    a = document.createElement("DIV");
+    a.setAttribute("id", this.id + "autocomplete-list");
+    a.setAttribute("class", "autocomplete-items");
+    /*append the DIV element as a child of the autocomplete container:*/
+    this.parentNode.appendChild(a);
+    /*for each item in the array...*/
+    for (i = 0; i < arr.length; i++) {
+      /*check if the item starts with the same letters as the text field value:*/
+      if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+        /*create a DIV element for each matching element:*/
+        b = document.createElement("DIV");
+        /*make the matching letters bold:*/
+        b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+        b.innerHTML += arr[i].substr(val.length);
+        /*insert a input field that will hold the current array item's value:*/
+        b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+        /*execute a function when someone clicks on the item value (DIV element):*/
+        b.addEventListener("click", function(e) {
+            /*insert the value for the autocomplete text field:*/
+            inp.value = this.getElementsByTagName("input")[0].value;
+            /*close the list of autocompleted values,
+            (or any other open lists of autocompleted values:*/
+            closeAllLists();
+        });
+        a.appendChild(b);
+      }
+    }
+});
+/*execute a function presses a key on the keyboard:*/
+inp.addEventListener("keydown", function(e) {
+    var x = document.getElementById(this.id + "autocomplete-list");
+    if (x) x = x.getElementsByTagName("div");
+    if (e.keyCode == 40) {
+      /*If the arrow DOWN key is pressed,
+      increase the currentFocus variable:*/
+      currentFocus++;
+      /*and and make the current item more visible:*/
+      addActive(x);
+    } else if (e.keyCode == 38) { //up
+      /*If the arrow UP key is pressed,
+      decrease the currentFocus variable:*/
+      currentFocus--;
+      /*and and make the current item more visible:*/
+      addActive(x);
+    } else if (e.keyCode == 13) {
+      /*If the ENTER key is pressed, prevent the form from being submitted,*/
+      e.preventDefault();
+      if (currentFocus > -1) {
+        /*and simulate a click on the "active" item:*/
+        if (x) x[currentFocus].click();
+      }
+    }
+});
+function addActive(x) {
+  /*a function to classify an item as "active":*/
+  if (!x) return false;
+  /*start by removing the "active" class on all items:*/
+  removeActive(x);
+  if (currentFocus >= x.length) currentFocus = 0;
+  if (currentFocus < 0) currentFocus = (x.length - 1);
+  /*add class "autocomplete-active":*/
+  x[currentFocus].classList.add("autocomplete-active");
+}
+function removeActive(x) {
+  /*a function to remove the "active" class from all autocomplete items:*/
+  for (var i = 0; i < x.length; i++) {
+    x[i].classList.remove("autocomplete-active");
+  }
+}
+function closeAllLists(elmnt) {
+  /*close all autocomplete lists in the document,
+  except the one passed as an argument:*/
+  var x = document.getElementsByClassName("autocomplete-items");
+  for (var i = 0; i < x.length; i++) {
+    if (elmnt != x[i] && elmnt != inp) {
+      x[i].parentNode.removeChild(x[i]);
+    }
+  }
+}
+/*execute a function when someone clicks in the document:*/
+document.addEventListener("click", function (e) {
+    closeAllLists(e.target);
+});
+}
+
+/*An array containing all the country names in the world:*/
+var countries = ["Free"]
+/*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
+autocomplete(document.getElementById("price"), countries);
+</script>
+
+<div style="float:left; ">
+  <label for="username">Start Date (Required)</label>
+  <input id="startDate" name="startDate"  type="date" />
+</div>
+
+
+<div style="float:left; ">
+    <label for="name">Start Time (Required)</label>
+    <select id="startTime" name = "startTime" type= "text">
+        <option >12:00 am</option>
+        <option >12:30 am</option>
+        <option >1:00 am</option>
+        <option >1:30 am</option>
+        <option >2:00 am</option>
+        <option >2:30 am</option>
+        <option >3:00 am</option>
+        <option >3:30 am</option>
+        <option >4:00 am</option>
+        <option >4:30 am</option>
+        <option >5:00 am</option>
+        <option >5:30 am</option>
+        <option >6:00 am</option>
+        <option >6:30 am</option>
+        <option >7:00 am</option>
+        <option >7:30 am</option>
+        <option >8:00 am</option>
+        <option >8:30 am</option>
+        <option >9:00 am</option>
+        <option >9:30 am</option>
+        <option >10:00 am</option>
+        <option >10:30 am</option>
+        <option >11:00 am</option>
+        <option >11:30 am</option>
+        <option >12:00 pm</option>
+        <option >12:30 pm</option>
+        <option >01:00 pm</option>
+        <option >01:30 pm</option>
+        <option >02:00 pm</option>
+        <option >02:30 pm</option>
+        <option >03:00 pm</option>
+        <option >03:30 pm</option>
+        <option >04:00 pm</option>
+        <option >04:30 pm</option>
+        <option >05:00 pm</option>
+        <option >05:30 pm</option>
+        <option >06:00 pm</option>
+        <option >06:30 pm</option>
+        <option >07:00 pm</option>
+        <option >07:30 pm</option>
+        <option >08:00 pm</option>
+        <option >08:30 pm</option>
+        <option >09:00 pm</option>
+        <option >09:30 pm</option>
+        <option >10:00 pm</option>
+        <option >10:30 pm</option>
+        <option >11:00 pm</option>
+        <option >11:30 pm</option>
+
+    </select>
+</div>
+
+
+
+<div style="clear:both;">&nbsp;</div>
+
+<div style="float:left;">
+  <label for="username">End Date (Required)</label>
+  <input id="endDate" name="endDate"  type="date" />
+</div>
+
+
+<div style="float:left;">
+  <label for="name">End Time (Required): </label>
+  <select id="endTime" name = "endTime" type= "text">
+      <option >12:00 am</option>
+      <option >12:30 am</option>
+      <option >1:00 am</option>
+      <option >1:30 am</option>
+      <option >2:00 am</option>
+      <option >2:30 am</option>
+      <option >3:00 am</option>
+      <option >3:30 am</option>
+      <option >4:00 am</option>
+      <option >4:30 am</option>
+      <option >5:00 am</option>
+      <option >5:30 am</option>
+      <option >6:00 am</option>
+      <option >6:30 am</option>
+      <option >7:00 am</option>
+      <option >7:30 am</option>
+      <option >8:00 am</option>
+      <option >8:30 am</option>
+      <option >9:00 am</option>
+      <option >9:30 am</option>
+      <option >10:00 am</option>
+      <option >10:30 am</option>
+      <option >11:00 am</option>
+      <option >11:30 am</option>
+      <option >12:00 pm</option>
+      <option >12:30 pm</option>
+      <option >01:00 pm</option>
+      <option >01:30 pm</option>
+      <option >02:00 pm</option>
+      <option >02:30 pm</option>
+      <option >03:00 pm</option>
+      <option >03:30 pm</option>
+      <option >04:00 pm</option>
+      <option >04:30 pm</option>
+      <option >05:00 pm</option>
+      <option >05:30 pm</option>
+      <option >06:00 pm</option>
+      <option >06:30 pm</option>
+      <option >07:00 pm</option>
+      <option >07:30 pm</option>
+      <option >08:00 pm</option>
+      <option >08:30 pm</option>
+      <option >09:00 pm</option>
+      <option >09:30 pm</option>
+      <option >10:00 pm</option>
+      <option >10:30 pm</option>
+      <option >11:00 pm</option>
+      <option >11:30 pm</option>
+  </select>
+</div>
+
+<div style="clear:both;">&nbsp;</div>
+
+
+
+
+<fieldset> Additional Information (Required)
+  <textarea name="additional"  placeholder="Type your message here...." tabindex="5" required></textarea>
+</fieldset>
+
+                    
+            <div class="file-field input-field"  > 
+              <div class="btn BLUE">
+                <span>Click to Upload Image (Optional) </span>
+                <input name="MyImage" type="file">
+              </div>
+             
+            </div>
+            <hr>
+            <button type="submit" class="btn">Submit</button>
+        </form>
+  </div>
+    
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+  

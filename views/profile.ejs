@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Affordable and professional web design">
+	<meta name="keywords" content="web design, affordable web design, professional web design">
+  	<meta name="author" content="Brad Traversy">
+    <title>Niggas News Party | Welcome</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+</head>
+<body>
+    
+<header>
+    <div class="container">
+        <div id="branding">
+            <h4> <span class="highlight">Niggas News</span> Party</h4>
+        </div>
+        <nav>
+            <ul>
+                <li class ="current"><a href = "/test">Home</a></li>
+                <li><a href = "/insertme">Add Party </a></li>
+                <li><a href = "/about">About</a></li>
+                <li><a href = "/logout">Logout</a></li>
+
+
+            </ul>
+          
+        </nav>
+    </div>
+</header>
+
+<section id="showcase">
+    <div class="container">
+        <h1>No more Boring Weekends: Let Get IT Bussing</h1>
+        
+    </div>
+</section>
+
+<section id="newsletter">
+        <div class="container">
+          <h4>Search For Events</h4>
+          <form action="/search"  autocomplete="off">
+                <input id="price" type="text" name="search" placeholder='Try  "Minneapolis"'>
+                <input type="submit" value="Search">
+          </form>
+        </div>
+</section>
+
+<hr>
+
+<section class="gallery">		
+		<div class="prices">
+            <h4>Explore Airbnb picks</h4>
+            <% party.forEach(function(item) { %>
+            <div class="img">
+                <img src="/<%= item.image %>" alt="image">
+				<div class="price-stamp"><h3>Price: <%= item.price %></h3></div>
+				<div class="description">
+                        <h2><%= item.party_name %></h2>
+                        <h6>Host: <%= item.full_name %></h6>
+                        <h5>Address: <%= item.address %>, <%= item.city_name %>, <%= item.state_name %> </h5>
+				</div>
+            </div>
+            <% }); %>  
+            
+        </div>
+
+        <hr>
+
+
+
+	
+            <div class="gallery-places">
+		
+                <h3>Explore Minnesota Popular Cities</h3>
+                
+                <ul class="places">
+                    
+                    <li class="img-large">
+                        <img src="/minneapolis.jpg">
+                        <h4 class="place-names">Minneapolis</h4>
+                    </li>
+                    
+                    
+                    <li class="img-short">
+                        <img src="/rochester.jpg">
+                        <h4 class="place-names">Rochester</h4>
+                    </li>
+                    
+                    
+                    <li class="img-short">
+                        <img src="Duluth.jpg">
+                        <h4 class="place-names">Duluth</h4>
+                    </li>
+                    
+                    
+                    <li class="img-short">
+                        <img src="/St Cloud.jpg">
+                        <h4 class="place-names">St Cloud</h4>
+                    </li>
+                    
+                    
+                    <li class="img-short">
+                        <img src="/winona.jpg">
+                        <h4 class="place-names">Winona</h4>
+                    </li>
+                    
+                    
+                    <li class="img-short">
+                        <img src="/Mankatoes.jpg">
+                        <h4 class="place-names">Mankato</h4>
+                    </li>
+                    
+                    
+                    <li class="img-large">
+                        <img src="/StCloud.jpg">
+                        <h4 class="place-names">St Paul</h4>
+                    </li>
+                    
+                    
+                    <li class="img-short">
+                        <img src="/brooklyn-park.jpg">
+                        <h4 class="place-names">Brooklyn Park</h4>
+                    </li>
+                    
+                    
+                    <li class="img-short">
+                        <img src="/moorhead.jpg">
+                        <h4 class="place-names">Moorhead</h4>
+                    </li>
+                    
+                    
+                    <li class="img-short">
+                        <img src="/st-louise.jpg">
+                        <h4 class="place-names">St Louise Park</h4>
+                    </li>
+                    
+                </ul>
+                
+            </div>
+</section>
+
+<footer>
+
+
+    <p> Nigga News Party, Copyright &copy; 2019</p>
+
+
+</footer>
+    
+</body>
+</html>
