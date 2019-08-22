@@ -3,9 +3,9 @@ var mysql = require('mysql');
 var bcrypt = require('bcryptjs');
 
 var db = mysql.createPool({
-  host: 'localhost',
-  user: 'root',
-  password: 'rootme',
+  host: 'party.cmef2c3wa0gr.us-east-2.rds.amazonaws.com',
+  user: 'party',
+  password: 'Layanparty17',
   database: 'partymania',
 
 });
@@ -19,7 +19,7 @@ module.exports = function(passport) {
         db.query("select * from register where email = ? ",
         email, function(err, data){
 
-          console.log(data);
+          console.log(email);
           
 
           if(!data.length){
