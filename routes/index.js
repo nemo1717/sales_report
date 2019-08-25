@@ -306,10 +306,7 @@ if(!req.query.date){
 
 
 router.get('/searche/:city/:date',function(req,res){
-  let q = [req.params.city];
-  console.log(q)
-  let q = [req.params.date];
-  console.log(q)
+
   db.query('SELECT  city_name, state_name, party_name, price, image, address, full_name  FROM register natural join party where userid = id and city_name LIKE "%'+req.params.city+'%" or date(startDate) = '+req.query.date+' or date(startDate) = '+req.query.date+' or address LIKE "%'+req.query.search+'%" or full_name LIKE "%'+req.query.search+'%" or price LIKE "%'+req.query.search+'%"' ,function(err, rows, fields) {
     console
     if (err) throw err;
