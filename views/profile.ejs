@@ -35,7 +35,7 @@
       <h4>Search For Events</h4>
       <form action="/search"  autocomplete="off">
             <input id="city" type="text" name="city" placeholder='Try  "Minneapolis"'>
-            <input placeholder="Choose Date" class="textbox-n" name = "date" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="date">
+            <input type="date" placeholder="Choose Date" name =date onchange="this.className=(this.value!=''?'has-value':'')">
 
             <button type="submit" class="searchButton">
         <i class="fa fa-search"></i>
@@ -128,7 +128,7 @@
                     
                 <a style="display: block;" href="/search?city=St Cloud">
                     <div class="img-large">
-                        <img src="/St Cloud.jpg">
+                        <img src="/stcloud.jpg">
                         <h4 class="place-names">St Cloud</h4>
                     </div>
                 </a>

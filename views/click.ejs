@@ -28,13 +28,17 @@
 <% include ./nav %>
 
 <section id="newsletter">
-        <div class="container">
-          <h4>Continue Searching</h4>
-          <form action="/search"  autocomplete="off">
-                <input id="price" type="text" name="search" placeholder='Try  "Minneapolis"'>
-                <input type="submit" value="Search">
-          </form>
-        </div>
+    <div class="container">
+      <h4>Search For Events</h4>
+      <form action="/search"  autocomplete="off">
+            <input id="city" type="text" name="city" placeholder='Try  "Minneapolis"'>
+            <input type="date" placeholder="Choose Date" name =date onchange="this.className=(this.value!=''?'has-value':'')">
+
+            <button type="submit" class="searchButton">
+        <i class="fa fa-search"></i>
+     </button>
+      </form>
+    </div>
 </section>
 
 <hr>

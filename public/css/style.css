@@ -88,7 +88,7 @@ header a:hover{
 
 #showcase{
     min-height: 400px;
-    background: url('../pages.jpg') no-repeat 0  ;
+    background: url('../hom.jpg') no-repeat 0;
     text-align: center;
     color: #ffffff;
     background-position: center;
@@ -97,7 +97,7 @@ header a:hover{
 }
 #showcase h1{
     margin-top: 100px;
-    font-size: 55px;
+    font-size: 50px;
     margin-bottom: 10px;
 }
 
@@ -125,8 +125,8 @@ header a:hover{
   }
   
 
-  #newsletter input[type=text], input[type=date], .dropdown-toggle, .dropdown-toggle {
-    width: 250px;
+  #newsletter input[type=text], .dropdown-toggle, .dropdown-toggle {
+    width: 271px;
  
     background: transparent;
     border: none;
@@ -140,6 +140,14 @@ header a:hover{
     padding: 12px 20px 12px 40px;
     -webkit-transition: width 0.3s ease-in-out;
     transition: width 0.3s ease-in-out;
+  }
+
+  #newsletter input[type="date"]:not(.has-value):before{
+    color: rgb(117, 117, 117);
+    content: attr(placeholder);
+    width: 110px;
+    padding: 12px 6px 12px 12px;
+    background-color: rgb(232, 234, 235);
   }
   
   .searchButton {
@@ -161,7 +169,7 @@ header a:hover{
 
   @media only screen and (max-width: 1200px) {
     .searchButton {
-      width: 250px;
+      width: 271px;
  
       background: transparent;
       border: none;
@@ -181,7 +189,7 @@ header a:hover{
     }
   }
   
-  #newsletter input[type=text]:focus, input[type=date]:focus,  .dropdown-toggle:focus, .dropdown-toggle:focus {
+  #newsletter input[type=text]:focus,  .dropdown-toggle:focus, .dropdown-toggle:focus {
     width: 170%;
   }
 
@@ -333,19 +341,19 @@ header a:hover{
 
 /* Explore Places */
       .gallery-places h3{
-        display: inline-block;
-        position: relative;
         width: 100%;
-        background: url('https://s20.postimg.org/o09gf7fvx/bag.jpg') no-repeat center top;
-        background-size: contain;
+    margin:auto;
+    margin-top: 50px;
+    overflow: hidden;
+    background: #ffffff;
        
 	}
 	.places{
-		height: 680px;
-		list-style-type: none;
-    padding: 0;
-    margin: 0;
-    display: block;
+    width: 100%;
+    margin:auto;
+    margin-top: 50px;
+    overflow: hidden;
+    background: #ffffff;
     
     
    
