@@ -14,24 +14,14 @@
         <div id="branding">
             <h4> <span class="highlight">Niggas News</span> Party</h4>
         </div>
-        <nav>
-            <ul>
-                <li ><a href = "/test">Home</a></li>
-                <li><a href = "/insertme">Add Party </a></li>
-                <li><a href = "/about">About</a></li>
-                <li class ="current"><a href = "/login">Login</a></li>
-                <li><a href = "/register">Register</a></li>
-
-            </ul>
-          
-        </nav>
     </div>
 </header>
+<% include ./nav %>
 
 <div class="row mt-5">
     <div class="col-md-6 m-auto">
       <div class="card card-body">
-        <h1 class="text-center mb-3"><i class="fas fa-sign-in-alt"></i>  Login</h1>
+        <h2 class="text-center mb-3"><i class="fas fa-sign-in-alt"></i>  Login</h2>
         <% include ./partials/messages %>
 
                     
@@ -65,8 +55,11 @@
           </div>
           <button type="submit" class="btn btn-primary btn-block">Login</button>
         </form>
+
+     
         <p class="lead mt-4">
-          No Account? <a href="/register">Register</a>
+          <h6>Forget Password? <a href ="/forget-password">Reset Password</a></h6>
+          <h6>No Account? <a href="/register">Register</a></h6>
         </p>
       </div>
     </div>

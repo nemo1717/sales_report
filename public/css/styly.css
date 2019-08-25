@@ -334,10 +334,10 @@ header a:hover{
 
           .img h6{
             font-weight: 100;
-        font-size: 15px;
-        font-weight: bold;  
-        color: #585858;
-        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+            font-size: 15px;
+            font-weight: bold;  
+            color: #4b4949;
+            font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
             }
 
             .imge h5{
@@ -376,8 +376,8 @@ header a:hover{
         @media only screen and (max-width: 990px) {
         .description h3{
           color: #791414;
-          margin-left: 40px;
-          margin-right:40px;
+          margin-left: 80px;
+          margin-right:80px;
           overflow: hidden;
           margin-top: 17%;
           margin-left:-100px;
