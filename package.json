@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "start:dev": "node server"
+    "start:dev": "node app"
   },
   "dependencies": {
     "alert-node": "^1.2.5",
