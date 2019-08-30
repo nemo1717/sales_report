@@ -142,11 +142,25 @@ header a:hover{
   transition: width 0.3s ease-in-out;
 }
 
+
+#newsletter input[type=date] {
+  color: rgb(0, 0, 0);
+  
+  width: 271px;
+  padding: 12px 7px 12px 14px;
+  background-color: rgb(232, 234, 235);
+  background-position: 10px 10px; 
+  background-repeat: no-repeat;
+  -webkit-transition: width 0.3s ease-in-out;
+  transition: width 0.3s ease-in-out;
+ 
+  border: none;
+}
+
 #newsletter input[type="date"]:not(.has-value):before{
   color: rgb(117, 117, 117);
   content: attr(placeholder);
   width: 110px;
-  padding: 12px 6px 12px 12px;
   background-color: rgb(232, 234, 235);
 }
 
@@ -423,15 +437,17 @@ header a:hover{
                     }
 
         @media only screen and (max-width: 990px) {
-        .description h3{
+        .img h3{
           color: #791414;
-          margin-left: 80px;
-          margin-right:80px;
+          float: left;
+          margin:auto;
+          margin-left: 10px;
+          margin-right:10px;
           overflow: hidden;
-          margin-top: 17%;
-          margin-left:-100px;
+          margin-top: 15%;
           font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
           font-size: 16px;
+          margin-bottom: 10px;
           font-weight: bolder;
           }
 
@@ -455,10 +471,9 @@ header a:hover{
       left: 0;
       bottom: 0;
       width: 100%;
-      background-color: red;
+      background-color: rgb(0, 0, 0);
       color: white;
       text-align: center;
-      margin-top: 100px;
      
       }
 

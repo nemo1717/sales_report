@@ -19,13 +19,12 @@
 <header>
     <div class="container">
         <div id="branding">
-            <h4> <span class="highlight">Niggas News</span> Party</h4>
-        
+            <h4> <span class="highlight">PartiFest</span> </h4>
         </div>
     </div>
 </header>
 
-<% include ./nav %>
+<% include ./navlogin %>
 
 <section id="newsletter">
     <div class="container">
@@ -54,6 +53,7 @@
                         <h2><%= item.party_name %></h2>
                         <h6>Host: <%= item.full_name %></h6>
                         <h3>Price: <%= item.price %></h3>
+                      
                    
                  </div>
                 </div>
@@ -63,12 +63,13 @@
               
                <h1> Location </h1>
       
-                <h5> <%= item.address %>, <%= item.city_name %>, <%= item.state_name %> </h5>
+                <h5> <%= item.address %>, <%= item.city_name %> </h5>
                 <hr>
                 <h1> Date and Time </h1>
           
                 <h6><%= moment(item.startDate).format("ddd") %>, <%= moment(item.startDate).format("MMMM")%>, <%= moment(item.startDate).format("D")%>, <%= moment(item.startDate).format("YYYY") %>  </h6>
                 <h6><%= item.startTime %> - <%= item.endTime %></h6>
+           
                
                 <hr>
               <h1>  Description </h1>
@@ -96,7 +97,7 @@
 <footer>
 
 
-    <p> Nigga News Party, Copyright &copy; 2019</p>
+    <p> PartiFest, Copyright &copy; 2019</p>
 
 
 </footer>

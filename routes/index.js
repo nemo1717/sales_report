@@ -28,7 +28,7 @@ var db = mysql.createPool({
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.redirect('/test');
 });
 
 //test mysql connection
@@ -74,7 +74,6 @@ router.get('/profile',  function(req, res, next) {
   });
 });
 
-
 router.get('/profile/:offset',  function(req, res, next) {
   var num = req.param.offset
   console.log(num)
@@ -89,7 +88,7 @@ router.get('/profile/:offset',  function(req, res, next) {
 });
 
 /*
-router.get('/click',  function(req, res, next) {
+router.get('k',  function(req, res, next) {
   db.query('SELECT  city_name, state_name, party_name, price, image, address, full_name  FROM register natural join party where userid = id', function (err, rs) {
     if(!err){
     res.render('click', {party: rs});
@@ -102,10 +101,9 @@ router.get('/click',  function(req, res, next) {
 */
 
 router.get('/click', function(req, res, next) {
-
-    
-      db.query('SELECT  city_name, state_name, party_name, price, image, aditional, startDate, startTime, endDate, endTime, address, full_name  FROM register natural join party where userid = id  ', function (err, rs) {
+      db.query('SELECT  city_name, state_name, party_name, price, image, startDate, startTime, endDate, endTime, address, full_name, aditional  FROM register natural join party where userid = id  ', function (err, rs) {
         if(!err){
+          console.log(rs.aditional);
           console.log(rs[0].aditional);
         res.render('click', {party: rs, moment:moment});
         }
@@ -125,7 +123,7 @@ router.get('/details/:token', function(req, res) {
   }
 
 else{
-  db.query('SELECT  city_name, state_name, party_name, price, image, startDate, startTime, endDate, endTime, address, full_name  FROM register natural join party where userid = id and partyid = ?  ',[req.params.token] ,function (err, rs) {
+  db.query('SELECT  city_name, state_name, party_name, price, image, startDate, startTime, endDate, endTime, address, full_name,aditional  FROM register natural join party where userid = id and partyid = ?  ',[req.params.token] ,function (err, rs) {
     if(!err){
     res.render('click', {party: rs, moment:moment});
     }
@@ -178,8 +176,17 @@ function checkFileType(file, cb){
 }
 
 // Inserting Parties
-router.get('/insertme', ensureAuthenticated, function (req, res, next){
-  res.render('insertme');
+router.get('/insertme',  function (req, res, next){
+  if(!req.user){
+    req.flash('error', 'For everyone safety reason,  you have to Register or Login to create events.');
+    return res.redirect('/login');
+  }
+  else{
+
+    res.render('insertme');
+
+  }
+  
  
 });
 
@@ -270,13 +277,13 @@ router.get('/delete', function (req, res, next){
 
 router.get('/search',function(req,res){
   let q = req.query.search;
-  console.log(req.query.city);
+
 
   let v = req.query.date;
   console.log(v);
 
 if (req.query.city && req.query.date ) {
-  db.query('SELECT partyid,  city_name, state_name, party_name, price, startDate, startTime, endDate, endTime, image, address, full_name FROM register natural join party where userid = id and city_name LIKE "%'+req.query.city+'%" and startDate = "'+req.query.date+'" ',function(err, rows, fields) {
+  db.query('SELECT partyid,  city_name, state_name, party_name, aditional, price, startDate, startTime, endDate, endTime, image, address, full_name FROM register natural join party where userid = id and city_name LIKE "%'+req.query.city+'%" and startDate = "'+req.query.date+'" ',function(err, rows, fields) {
     if (err) throw err;
     console.log(rows);
     res.render('test', {party: rows, moment:moment});
@@ -285,7 +292,7 @@ if (req.query.city && req.query.date ) {
 }
 
 if(!req.query.city){
-  db.query('SELECT partyid,  city_name, state_name, party_name, price, startDate, startTime, endDate, endTime, image, address, full_name FROM register natural join party where userid = id  and startDate = "'+req.query.date+'" ',function(err, rows, fields) {
+  db.query('SELECT partyid,  city_name, aditional, state_name, party_name, price, startDate, startTime, endDate, endTime, image, address, full_name FROM register natural join party where userid = id  and startDate = "'+req.query.date+'" ',function(err, rows, fields) {
     if (err) throw err;
     console.log(rows);
     res.render('test', {party: rows, moment:moment});
@@ -295,7 +302,7 @@ if(!req.query.city){
 
 
 if(!req.query.date){
-  db.query('SELECT partyid,  city_name, state_name, party_name, price, startDate, startTime, endDate, endTime, image, address, full_name FROM register natural join party where userid = id and city_name LIKE "%'+req.query.city+'%" ',function(err, rows, fields) {
+  db.query('SELECT partyid,  city_name, state_name, aditional, party_name, price, startDate, startTime, endDate, endTime, image, address, full_name FROM register natural join party where userid = id and city_name LIKE "%'+req.query.city+'%" ',function(err, rows, fields) {
     if (err) throw err;
     console.log(rows);
     res.render('test', {party: rows, moment:moment});
@@ -307,7 +314,7 @@ if(!req.query.date){
 
 router.get('/searche/:city/:date',function(req,res){
 
-  db.query('SELECT  city_name, state_name, party_name, price, image, address, full_name  FROM register natural join party where userid = id and city_name LIKE "%'+req.params.city+'%" or date(startDate) = '+req.query.date+' or date(startDate) = '+req.query.date+' or address LIKE "%'+req.query.search+'%" or full_name LIKE "%'+req.query.search+'%" or price LIKE "%'+req.query.search+'%"' ,function(err, rows, fields) {
+  db.query('SELECT city_name, state_name, party_name, price, image, address, full_name, aditional  FROM register natural join party where userid = id and city_name LIKE "%'+req.params.city+'%" or date(startDate) = '+req.query.date+' or date(startDate) = '+req.query.date+' or address LIKE "%'+req.query.search+'%" or full_name LIKE "%'+req.query.search+'%" or price LIKE "%'+req.query.search+'%"' ,function(err, rows, fields) {
     console
     if (err) throw err;
     res.render('test', {party: rows});
@@ -372,11 +379,6 @@ router.post('/register', function(req,res){
       password2
     });
   }
-
-
-
-
-
   // validation passed
   else{
     db.query("select COUNT(*) AS cnt from register where email = ? ",
@@ -418,10 +420,11 @@ router.post('/register', function(req,res){
 
                 db.query("insert into `register`(full_name, nick_name, email, phone_number, password, confirmtoken) values ('"+name+"','"+nick_name+"', '"+email+"','"+phone+"','"+password+"','"+token+"')", function(err, rs){
                   if(err){
-                    res.send('not inserted buddy')
+                    req.flash('error', 'Account not Registered.Please try again')
+                    res.redirect('/register');
                   }
                   else{
-                    req.flash('success_msg', 'Please check your email inbox to confirm your email to login')
+                    req.flash('success_msg', 'Please check your email inbox or junks to confirm your email to login')
                     res.redirect('/login');
                    }
                 });
@@ -456,7 +459,7 @@ router.post('/register', function(req,res){
                 
                 to: email,
                 from: 'tjlayan20@gmail.com',
-                subject: 'Node.js Confirm email',
+                subject: 'PartiFest Email Confirmation',
                 text: 'You are receiving this because you just register for an account with us.\n\n' +
                   'Please click on the following link, or paste this into your browser to confirm your email:\n\n' +
                   'http://' + req.headers.host + '/confirm/' + token + '\n\n' +
@@ -487,11 +490,23 @@ router.post('/register', function(req,res){
 
 });
 
+router.get('/confrim-email', function(req, res) {
+
+
+  db.query('SELECT partyid,  city_name, state_name, party_name, aditional, price, startDate, startTime, endDate, endTime, image, address, full_name FROM register natural join party where userid = id ',function(err, rows, fields) {
+    if (err) throw err;
+    console.log(rows[0].aditional);
+
+  });
+
+
+});
+
 router.get('/confirm/:token', function(req, res) {
   db.query('select * from register where confirmtoken = ? ', [req.params.token ], function(err, data){
 
    if (!data.length) {
-     req.flash('error', 'Email not successfully confirmed due to wrong link.');
+     req.flash('error', 'Email not successfully confirmed due to wrong confirmation link.');
      res.redirect('/register');
    }
    else{
@@ -546,6 +561,36 @@ router.get('/forget-password',function(req,res){
 
 // forget password post
 router.post('/forget-password', function(req, res, next){
+  const {email} = req.body;
+  console.log(email);
+  let errors = [];
+
+  if(!email) {
+    errors.push({msg: 'Please fill in your email'});
+  }
+
+  if(errors.length > 0) {
+    res.render('forget-password', {
+      errors,
+      email
+    });
+  }
+  // validation passed
+  else{
+    console.log(email);
+    db.query("select * from register where email = ? ",
+    email, function(err, data){
+      if(!data.length){
+        errors.push({msg: 'That email is not registered '});
+        res.render('forget-password', {
+          errors,
+          email
+      
+        });
+      }
+      else{
+    
+  
   async.waterfall([
     function(done) {
       crypto.randomBytes(20, function(err, buf) {
@@ -555,13 +600,7 @@ router.post('/forget-password', function(req, res, next){
       });
     },
     function(token, done) {
-      db.query("select * from register where email = ? ",req.body.email, function(err, data){
-      if(!data){
-        req.flash('error', 'No account with that email address exists.');
-          return res.redirect('/forgot-password');
-          }
-
-      else{
+  
         var d = new Date(Date.now()+3600000).toISOString().slice(0, 19).replace('T', ' ');
    
         db.query("update register set resetpasswordtoken = ?, resetpasswordexpire = ? where id = ?",
@@ -574,10 +613,9 @@ router.post('/forget-password', function(req, res, next){
 
             }
             
-        });
-        }
+          });
         done(err, token, data);
-    });
+
     },
 
 
@@ -597,6 +635,7 @@ router.post('/forget-password', function(req, res, next){
         tls:{
           rejectUnauthorized:false
         }
+      
       });
 
       
@@ -605,7 +644,7 @@ router.post('/forget-password', function(req, res, next){
         
         to: data[0].Email,
         from: 'tjlayan20@gmail.com',
-        subject: 'Node.js Password Reset',
+        subject: 'PartiFest Password Reset',
         text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
           'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
           'http://' + req.headers.host + '/reset/' + token + '\n\n' +
@@ -614,8 +653,12 @@ router.post('/forget-password', function(req, res, next){
       smtpTransport.sendMail(mailOptions, function(err) {
         console.log('mail sent');
 
-        req.flash('success', 'An e-mail has been sent to ' + data[0].Email + ' with further instructions.');
+        if(!err){
+
+        req.flash('success_messages', 'An e-mail has been sent to ' + data[0].Email + ' with further instructions.');
         done(err, 'done');
+
+        }
     
       });
   
@@ -629,6 +672,10 @@ router.post('/forget-password', function(req, res, next){
     res.redirect( '/forget-password');
   });
 
+   }
+  });
+}
+    
 });
 
 // reset token
@@ -636,7 +683,7 @@ router.get('/reset/:token', function(req, res) {
    db.query('select * from register where resetpasswordtoken = ? ', [req.params.token ], function(err, data){
      console.log(data);
     if (!data.length) {
-      req.flash('error', 'Password reset token is invalid.');
+      req.flash('error', 'Password reset link is invalid.');
       res.redirect('/forget-password');
     }
     else{
@@ -653,15 +700,21 @@ router.post('/reset/:token', function(req, res) {
 
   if( !password || !password2) {
     errors.push({msg: 'Please fill in all required fields'});
+    
   }
 
+ 
   if(password != password2){
     errors.push({msg: 'Password do not match'});
   }
 
   if(errors.length > 0) {
-    res.render('reset', {token: req.params.token});
+    res.render('reset', {token: req.params.token, errors
+
+    });
   }
+
+ 
 
   // validation passed
   else{

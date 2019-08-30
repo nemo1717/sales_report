@@ -39,6 +39,14 @@
           </div>
         <% } %>
 
+        <% if ( success_msg != '' ) { %>
+          <div class="alert alert-success" >
+              <strong><%= error %> </strong>
+          </div>
+        <% } %>
+
+        <% include ./partials/messages %>
+
         <form action="/reset/<%= token %>" method="POST">
 
           <div class="form-group">
