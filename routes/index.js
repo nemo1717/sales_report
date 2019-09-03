@@ -312,13 +312,11 @@ if(!req.query.date){
 });
 
 
-router.get('/searche/:city/:date',function(req,res){
+router.get('/advert',function(req,res){
 
-  db.query('SELECT city_name, state_name, party_name, price, image, address, full_name, aditional  FROM register natural join party where userid = id and city_name LIKE "%'+req.params.city+'%" or date(startDate) = '+req.query.date+' or date(startDate) = '+req.query.date+' or address LIKE "%'+req.query.search+'%" or full_name LIKE "%'+req.query.search+'%" or price LIKE "%'+req.query.search+'%"' ,function(err, rows, fields) {
-    console
-    if (err) throw err;
-    res.render('test', {party: rows});
-  });
+
+    res.render('advert');
+
 });
 
 
@@ -532,9 +530,7 @@ router.get('/login',function(req,res){
   res.render('login');
 });
 
-router.get('/searche',function(req,res){
-  res.render('searche');
-});
+
 
 //login post
 router.post('/login', function(req, res, next) {
