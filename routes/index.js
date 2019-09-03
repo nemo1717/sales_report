@@ -358,7 +358,7 @@ router.post('/register', function(req,res){
   }
 
 
-  if(!name || !email || !phone || !password || !password2) {
+  if(!name || !email || !password || !password2) {
     errors.push({msg: 'Please fill in all required fields'});
   }
 
@@ -737,6 +737,10 @@ router.post('/reset/:token', function(req, res) {
         }
 });
 
+
+router.get('/page-not-found',function(req,res){
+  res.render('page-not-found');
+});
 
 
   

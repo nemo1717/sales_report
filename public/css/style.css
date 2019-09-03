@@ -105,6 +105,24 @@ header a:hover{
     font-size: 20px;
 }
 
+/* notice */
+#newsletters{
+  padding:3px;
+  color:#ffffff;
+  background:#ff0000;
+  text-align: center;
+}
+
+#newsletters h4{
+
+  height: 25px;
+  font-size: 15px;
+
+}
+
+
+/*  end */
+
 #newsletter{
     padding:15px;
     color:#ffffff;
@@ -661,3 +679,4 @@ fieldset {
 
 
 
+/* terms */

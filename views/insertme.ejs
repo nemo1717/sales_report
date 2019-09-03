@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" type="text/css" href="/css/style.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 
 <header>
@@ -16,6 +19,12 @@
     </div>
 </header>
 <% include ./navlogin %>
+<section id="newsletters">
+    <div class="container">
+      <h4>Note: You can only create events in "Minesota cities" for now!!!</h4>
+    </div>
+  </section>
+
 
 <body>
     <div class="container">
@@ -25,18 +34,21 @@
           <% include ./partials/messages %>
           <h3>Add Your Event</h3>
           <fieldset> Party Name (Required) <input name = "party_name" placeholder="Party Name" type="text" /></fieldset>
+        </br>
           <fieldset> Address (Required) <input name = "address" placeholder="Address" type="text" /></fieldset>
-
+        </br>
           <fieldset>
-              <label for="State">State (Required)</label>
+              State (Required)
               <select id="state_name"  name="state_name" type = "text">
               <option value="Minnesota">Minnesota</option>
             </select>
           </fieldset>
+        </br>
        
           <fieldset> City (Required)
                     <input id="myInput" type="text" name="city_name" placeholder="Please Only Select Available Cities">
                   </fieldset>
+                </br>
 
                 <script>
                 function autocomplete(inp, arr) {
@@ -149,6 +161,7 @@
 <fieldset>  Price (Required)
   <input id="price" type="text" name="price" placeholder="Type Free or the Dollar Amount">
 </fieldset> 
+</br>
 
 
 <script>
@@ -256,13 +269,13 @@ autocomplete(document.getElementById("price"), countries);
 </script>
 
 <div style="float:left; ">
-  <label for="username">Start Date (Required)</label>
+ Start Date (Required)
   <input id="startDate" name="startDate"  type="date" />
 </div>
 
 
 <div style="float:left; ">
-    <label for="name">Start Time (Required)</label>
+    Start Time (Required)
     <select id="startTime" name = "startTime" type= "text">
         <option >12:00 am</option>
         <option >12:30 am</option>
@@ -321,13 +334,13 @@ autocomplete(document.getElementById("price"), countries);
 <div style="clear:both;">&nbsp;</div>
 
 <div style="float:left;">
-  <label for="username">End Date (Required)</label>
+  End Date (Required)
   <input id="endDate" name="endDate"  type="date" />
 </div>
 
 
 <div style="float:left;">
-  <label for="name">End Time (Required): </label>
+  End Time (Required)
   <select id="endTime" name = "endTime" type= "text">
       <option >12:00 am</option>
       <option >12:30 am</option>
@@ -392,13 +405,17 @@ autocomplete(document.getElementById("price"), countries);
                     
             <div class="file-field input-field"  > 
               <div class="btn BLUE">
-                <span>Click to Upload Image (Optional - our default image will be use) </span>
+                <span>Click to Upload Image (if no file choosen, our default image will be use) </span>
                 <input name="MyImage" type="file">
               </div>
              
             </div>
-            <hr>
+
+              
             <button type="submit" class="btn">Submit</button>
+
+        
+
         </form>
   </div>
    
@@ -409,8 +426,13 @@ autocomplete(document.getElementById("price"), countries);
 
 
 </footer>
+<script></script>
+
+
 </body>
 </html>
+
+
 
 
 
