@@ -406,32 +406,32 @@ header a:hover{
             .imge h5{
           font-weight: 100;
           font-size: 15px;
-          font-weight: bold;  
+       
           color: #4b4949;
-          font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
+          font-family: Arial, Helvetica, sans-serif;
               }
 
               .imge h6{
             font-weight: 100;
             font-size: 15px;
-            font-weight: bold;  
+             
             color: #4b4949;
-            font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
+            font-family: Arial, Helvetica, sans-serif;
                 }
 
                 .imge h2{
                   font-weight: 100;
             font-size: 15px;
-            font-weight: bold;  
+             
             color: #4b4949;
-            font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
+            font-family: Arial, Helvetica, sans-serif;;
                   }
 
                   .prices h1{
                     font-weight: 100;
                 font-size: 19px;
-                font-weight: lighter;  
-                color: #494949;
+                font-weight: 400;  
+                color: #000000;
                 font-family: Arial, Helvetica, sans-serif;
                 margin-bottom: 30px;
                     }
