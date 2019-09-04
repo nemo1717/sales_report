@@ -271,8 +271,6 @@ router.post('/insertme', function (req, res, next){
   });
 });
        
-
-
 router.get('/delete', function (req, res, next){
   db.query('delete from state where id = ?')
 });
