@@ -28,14 +28,24 @@
 
 <body>
     <div class="container">
-        <h3><%= typeof msg != 'undefined' ? msg : '' %></h3>
+      
+
+        
 
         <form action="/insertme" method="POST" autocomplete="off" id="contact" enctype="multipart/form-data">
+          <h4 style="text-align: center; color: red; font-size: 15px"><%= typeof msg != 'undefined' ? msg : '' %></h4>
           <% include ./partials/messages %>
+          
+          <% if ( success_messages !='' ) { %>
+            <div class="alert alert-success" >
+                <strong><%= success_messages %> </strong>
+            </div>
+            <% } %>
+
           <h3>Add Your Event</h3>
-          <fieldset> Party Name (Required) <input name = "party_name" placeholder="Party Name" type="text" /></fieldset>
+          <fieldset> Party Name (Required) <input name = "party_name" placeholder="Party Name" type="text"  required/></fieldset>
         </br>
-          <fieldset> Address (Required) <input name = "address" placeholder="Address" type="text" /></fieldset>
+          <fieldset> Address (Required) <input name = "address" placeholder="Address" type="text" required /></fieldset>
         </br>
           <fieldset>
               State (Required)
@@ -46,7 +56,7 @@
         </br>
        
           <fieldset> City (Required)
-                    <input id="myInput" type="text" name="city_name" placeholder="Please Only Select Available Cities">
+                    <input id="myInput" type="text" name="city_name" placeholder="Please Only Select Available Cities" required>
                   </fieldset>
                 </br>
 
@@ -159,7 +169,7 @@
 
 
 <fieldset>  Price (Required)
-  <input id="price" type="text" name="price" placeholder="Type Free or the Dollar Amount">
+  <input id="price" type="text" name="price" placeholder="Type Free or the Dollar Amount" required>
 </fieldset> 
 </br>
 
@@ -270,13 +280,13 @@ autocomplete(document.getElementById("price"), countries);
 
 <div style="float:left; ">
  Start Date (Required)
-  <input id="startDate" name="startDate"  type="date" />
+  <input id="startDate" name="startDate"  type="date"  required/>
 </div>
 
 
 <div style="float:left; ">
     Start Time (Required)
-    <select id="startTime" name = "startTime" type= "text">
+    <select id="startTime" name = "startTime" type= "text" >
         <option >12:00 am</option>
         <option >12:30 am</option>
         <option >1:00 am</option>
@@ -335,13 +345,13 @@ autocomplete(document.getElementById("price"), countries);
 
 <div style="float:left;">
   End Date (Required)
-  <input id="endDate" name="endDate"  type="date" />
+  <input id="endDate" name="endDate"  type="date" required/>
 </div>
 
 
 <div style="float:left;">
   End Time (Required)
-  <select id="endTime" name = "endTime" type= "text">
+  <select id="endTime" name = "endTime" type= "text" >
       <option >12:00 am</option>
       <option >12:30 am</option>
       <option >1:00 am</option>

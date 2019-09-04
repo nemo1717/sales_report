@@ -212,6 +212,15 @@ router.post('/insertme', function (req, res, next){
         msg: err
       });
     }
+
+    //validation
+    if (!req.body.price || !req.body.party_name || !req.body.city_name || !req.body.address|| !req.body.additional || !req.body.startDate || !req.body.endDate  ){
+      req.flash('error', 'Fill in all required fields')
+      res.redirect('/insertme');
+    }
+
+
+    //
     //check if input state is minnesota
     if (states.toLowerCase().indexOf("minnesota") !== -1){
         if (cit.indexOf(citi) > -1) {
@@ -221,7 +230,7 @@ router.post('/insertme', function (req, res, next){
             console.log(sta);
             db.query("insert into `party` (party_name,address,city_name,state_name,userid,image,price,startDate, startTime, endDate, endTime, aditional) values ('"+req.body.party_name+"', '"+req.body.address+"','"+sta+"','"+req.body.state_name+"','"+req.user.id+"','"+req.file.filename+"','"+req.body.price+"', '"+req.body.startDate+"', '"+req.body.startTime+"', '"+req.body.endDate+"', '"+req.body.endTime+"', '"+req.body.additional+"')", function(err, rs){
               if (!err){
-                req.flash('success_msg', 'Your event successfully added. Continue adding or go to homepage to view it.')
+                req.flash('success_messages', 'Your event successfully added. Continue adding or go to homepage to view it.')
                 res.redirect('/insertme');
               }
               else{
@@ -234,7 +243,7 @@ router.post('/insertme', function (req, res, next){
             var defaults = "defaults.jpg";
             db.query("insert into `party` (party_name,address,city_name,state_name,userid, price, startDate, startTime, endDate, endTime, aditional, image) values ('"+req.body.party_name+"', '"+req.body.address+"','"+sta+"','"+req.body.state_name+"' ,'"+req.user.id+"','"+req.body.price+"',  '"+req.body.startDate+"', '"+req.body.startTime+"',  '"+req.body.endDate+"', '"+req.body.endTime+"','"+req.body.additional+"', '"+defaults+"' )", function(err, rs){
               if(!err){
-                req.flash('success_msg', 'Your event successfully added. Continue adding or go to homepage to view it.')
+                req.flash('success_messages', 'Your event successfully added. Continue adding or go to homepage to view it.')
                 res.redirect('/insertme');
               }
               else{
@@ -246,7 +255,7 @@ router.post('/insertme', function (req, res, next){
           }
       } else {
         res.render('insertme', {
-          msg: 'Error: Please Select Only Cities in City Field!'
+          msg: 'Error: Please, Select Only Cities Availble in the Dropdown !'
         });
       }
     }

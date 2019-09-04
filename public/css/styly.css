@@ -406,6 +406,7 @@ header a:hover{
             .imge h5{
           font-weight: 100;
           font-size: 15px;
+          font-weight: 500;
        
           color: #4b4949;
           font-family: Arial, Helvetica, sans-serif;
@@ -414,7 +415,7 @@ header a:hover{
               .imge h6{
             font-weight: 100;
             font-size: 15px;
-             
+            font-weight: 500;
             color: #4b4949;
             font-family: Arial, Helvetica, sans-serif;
                 }
@@ -422,7 +423,7 @@ header a:hover{
                 .imge h2{
                   font-weight: 100;
             font-size: 15px;
-             
+            font-weight: 500;
             color: #4b4949;
             font-family: Arial, Helvetica, sans-serif;;
                   }
@@ -430,7 +431,7 @@ header a:hover{
                   .prices h1{
                     font-weight: 100;
                 font-size: 19px;
-                font-weight: 400;  
+                font-weight: 600;  
                 color: #000000;
                 font-family: Arial, Helvetica, sans-serif;
                 margin-bottom: 30px;
