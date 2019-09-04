@@ -283,29 +283,44 @@ router.get('/search',function(req,res){
   console.log(v);
 
 if (req.query.city && req.query.date ) {
-  db.query('SELECT partyid,  city_name, state_name, party_name, aditional, price, startDate, startTime, endDate, endTime, image, address, full_name FROM register natural join party where userid = id and city_name LIKE "%'+req.query.city+'%" and startDate = "'+req.query.date+'" ',function(err, rows, fields) {
+  db.query('SELECT partyid,  city_name, state_name, party_name, aditional, price, startDate, startTime, endDate, endTime, image, address, full_name FROM register natural join party where userid = id and city_name LIKE "%'+req.query.city+'%" and startDate = "'+req.query.date+'" ',function(err, rs, fields) {
     if (err) throw err;
-    console.log(rows);
-    res.render('test', {party: rows, moment:moment});
+
+    if(!req.user){
+      
+      res.render('test', {party: rs, moment:moment});
+      }
+    if(req.user){
+      res.render('profile', {party: rs, moment:moment});
+    }
 
   });
 }
 
 if(!req.query.city){
-  db.query('SELECT partyid,  city_name, aditional, state_name, party_name, price, startDate, startTime, endDate, endTime, image, address, full_name FROM register natural join party where userid = id  and startDate = "'+req.query.date+'" ',function(err, rows, fields) {
+  db.query('SELECT partyid,  city_name, aditional, state_name, party_name, price, startDate, startTime, endDate, endTime, image, address, full_name FROM register natural join party where userid = id  and startDate = "'+req.query.date+'" ',function(err, rs, fields) {
     if (err) throw err;
-    console.log(rows);
-    res.render('test', {party: rows, moment:moment});
+    if(!req.user){ 
+      res.render('test', {party: rs, moment:moment});
+    }
+    if(req.user){
+      res.render('profile', {party: rs, moment:moment});
+    }
 
   });
 }
 
 
 if(!req.query.date){
-  db.query('SELECT partyid,  city_name, state_name, aditional, party_name, price, startDate, startTime, endDate, endTime, image, address, full_name FROM register natural join party where userid = id and city_name LIKE "%'+req.query.city+'%" ',function(err, rows, fields) {
+  db.query('SELECT partyid,  city_name, state_name, aditional, party_name, price, startDate, startTime, endDate, endTime, image, address, full_name FROM register natural join party where userid = id and city_name LIKE "%'+req.query.city+'%" ',function(err, rs, fields) {
     if (err) throw err;
-    console.log(rows);
-    res.render('test', {party: rows, moment:moment});
+    if(!req.user){
+      
+      res.render('test', {party: rs, moment:moment});
+    }
+      if(req.user){
+      res.render('profile', {party: rs, moment:moment});
+    }
 
   });
 }
@@ -313,9 +328,7 @@ if(!req.query.date){
 
 
 router.get('/advert',function(req,res){
-
-
-    res.render('advert');
+  res.render('advert');
 
 });
 
@@ -397,9 +410,7 @@ router.post('/register', function(req,res){
             password2
           });
         }
-        else{
-
-         
+        else{    
           async.waterfall([
             function(done) {
               crypto.randomBytes(20, function(err, buf) {

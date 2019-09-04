@@ -124,32 +124,89 @@ header a:hover{
 /*  end */
 
 #newsletter{
-    padding:15px;
-    color:#ffffff;
-    background:#35424a;
-    margin-top: 50px;
-    text-align: center;
-  }
-  
-  #newsletter h4{
+  padding:15px;
+  color:#ffffff;
+  background:#35424a;
+  margin-top: 50px;
+  text-align: center;
+}
 
-    height: 28px;
-  
-  }
-  
-  #newsletter form {
-    float:center;
-    margin-top:20px;
-  }
-  
+#newsletter h4{
 
-  #newsletter input[type=text], .dropdown-toggle, .dropdown-toggle {
-    width: 271px;
+  height: 28px;
+
+}
+
+#newsletter form {
+  float:center;
+  margin-top:20px;
+}
+
+
+#newsletter input[type=text], .dropdown-toggle, .dropdown-toggle {
+  width: 271px;
+
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #000000;
+  background-color: rgb(232, 234, 235);
+
+  font-size: 16px;
  
+  background-position: 10px 10px; 
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px;
+  -webkit-transition: width 0.3s ease-in-out;
+  transition: width 0.3s ease-in-out;
+}
+
+
+#newsletter input[type=date] {
+  color: rgb(0, 0, 0);
+  
+  width: 271px;
+  padding: 12px 7px 12px 14px;
+  background-color: rgb(232, 234, 235);
+  background-position: 10px 10px; 
+  background-repeat: no-repeat;
+  -webkit-transition: width 0.3s ease-in-out;
+  transition: width 0.3s ease-in-out;
+ 
+  border: none;
+}
+
+#newsletter input[type="date"]:not(.has-value):before{
+  color: rgb(117, 117, 117);
+  content: attr(placeholder);
+  width: 110px;
+  background-color: rgb(232, 234, 235);
+}
+
+.searchButton {
+
+
+  width: 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  background: #00B4CC;
+  text-align: center;
+  color: #fff;
+  
+  cursor: pointer;
+
+}
+
+@media only screen and (max-width: 1200px) {
+  .searchButton {
+    width: 271px;
+
     background: transparent;
     border: none;
     border-bottom: 1px solid #000000;
-    background-color: rgb(232, 234, 235);
+    background: #00B4CC;
 
     font-size: 16px;
    
@@ -158,84 +215,42 @@ header a:hover{
     padding: 12px 20px 12px 40px;
     -webkit-transition: width 0.3s ease-in-out;
     transition: width 0.3s ease-in-out;
-  }
-
-  #newsletter input[type="date"]:not(.has-value):before{
-    color: rgb(117, 117, 117);
-    content: attr(placeholder);
-    width: 110px;
-    padding: 12px 6px 12px 12px;
-    background-color: rgb(232, 234, 235);
-  }
-  
-  .searchButton {
-
-
-    width: 20px;
-    box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    padding: 12px 20px 12px 40px;
-    background: #00B4CC;
-    text-align: center;
-    color: #fff;
     
     cursor: pointer;
   
   }
+}
 
-  @media only screen and (max-width: 1200px) {
-    .searchButton {
-      width: 271px;
- 
-      background: transparent;
-      border: none;
-      border-bottom: 1px solid #000000;
-      background: #00B4CC;
+#newsletter input[type=text]:focus,  .dropdown-toggle:focus, .dropdown-toggle:focus {
+  width: 170%;
+}
+
+#newsletter input::placeholder {
+  color: rgb(0, 0, 0);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   
-      font-size: 16px;
-     
-      background-position: 10px 10px; 
-      background-repeat: no-repeat;
-      padding: 12px 20px 12px 40px;
-      -webkit-transition: width 0.3s ease-in-out;
-      transition: width 0.3s ease-in-out;
-      
-      cursor: pointer;
-    
-    }
-  }
-  
-  #newsletter input[type=text]:focus,  .dropdown-toggle:focus, .dropdown-toggle:focus {
-    width: 170%;
-  }
+}
 
-  #newsletter input::placeholder {
-    color: rgb(0, 0, 0);
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    
-  }
-
-  #newsletter input[type="submit"] {
-    border-radius: 2px;
-    background: #f2f2f2;
-    border: 1px solid #f2f2f2;
-    color: #757575;
-    cursor: default;
-    font-size: 14px;
-    font-weight: bold;
-    width: 100px;
-    padding: 0 16px;
-    height:50px;
+#newsletter input[type="submit"] {
+  border-radius: 2px;
+  background: #f2f2f2;
+  border: 1px solid #f2f2f2;
+  color: #757575;
+  cursor: default;
+  font-size: 14px;
+  font-weight: bold;
+  width: 100px;
+  padding: 0 16px;
+  height:50px;
 }
 #newsletter input[type="submit"]:hover {
-    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
-    background: #f8f8f8;
-    border: 1px solid #c6c6c6;
-    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
-    color: #222;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+  background: #f8f8f8;
+  border: 1px solid #c6c6c6;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+  color: #222;
 }
+
 
 /* Plces Prices*/
 
