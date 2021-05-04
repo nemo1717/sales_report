@@ -3,12 +3,12 @@ var mysql = require('mysql');
 var bcrypt = require('bcryptjs');
 var nodemailer = require('nodemailer');
 
+// Mysql connectionString
 var db = mysql.createPool({
-  host: 'party.cmef2c3wa0gr.us-east-2.rds.amazonaws.com',
-  user: 'party',
-  password: 'Layanparty17',
-  database: 'partymania',
-
+  host: 'XXXXXXXXX',
+  user: 'XXXX',
+  password: 'XXXXX',
+  database: 'XXXXXXX',
 });
 
 module.exports = function(passport) {
@@ -19,18 +19,10 @@ module.exports = function(passport) {
         // Match email
         db.query("select * from register where email = ? ",
         email, function(err, data){
-
-          console.log(email);
-          
-
           if(!data.length){
             return done(null, false, { message: 'That email is not registered' });
           }
-
-
-            
           else{
-
             if (data[0].status == "false"){      
               var smtpTransport = nodemailer.createTransport({
                 host: 'smtp.gmail.com',
