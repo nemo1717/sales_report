@@ -17,10 +17,10 @@ var moment = require('moment');
 // Mysql connectionString
 var mysql = require('mysql');
 var db = mysql.createPool({
-  host: 'party.cmef2c3wa0gr.us-east-2.rds.amazonaws.com',
-  user: 'party',
-  password: 'Layanparty17',
-  database: 'partymania',
+  host: 'XXXXXXXXX',
+  user: 'XXXX',
+  password: 'XXXXX',
+  database: 'XXXXXXX',
 
 });
 
